@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  template_service:
+    container_name: template_service
+    build:
+      context: .
+    image: template_service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/templates
+    depends_on:
+      - db
+
+  db:
+    container_name: postgres_template_db
+    image: postgres:13.3
+    environment:
+      - POSTGRES_PASSWORD=153016321734
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=templates
+    ports:
+      - "5434:5432"
